@@ -1,3 +1,9 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
 body{
     display: flex;
     width: 100vw;
@@ -19,17 +25,29 @@ div{
 .invisi{
     display: flex;
     flex-direction: row;
-    width: 90%;
+    width: 100%;
     height: fit-content;
     background-color: transparent;
+    margin: 2%;
+    justify-content: space-between;
+    align-content: space-between;
 }
 
 .tile{
     height: 100px;
     width: 100px;
     background-color: black;
-    margin: 2%;
-    border-radius: 25%;
+    border-radius: 20%;
+}
+
+canvas{
+    position:absolute;
+    height: 100px;
+    width: 100px;
+}
+
+.reveal{
+    background-color: aliceblue;
 }
 
 #desc{
@@ -42,8 +60,10 @@ div{
 #board{
     display: flex;
     flex-direction: column;
-    width: 65%;
-    height: fit-content;
+    align-content: center;
+    justify-content: center;
+    width: 60%;
+    height: max-content;
     background-color: transparent;
 }
 
@@ -58,7 +78,7 @@ div{
     justify-content: space-around;
     align-items: center;
     flex-direction: row;
-    width: 70%;
+    width: 80%;
     height: 60%;
     margin: auto;
     border-radius: 50px;
