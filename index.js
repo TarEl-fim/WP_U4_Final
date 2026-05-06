@@ -36,12 +36,14 @@ class Ticket{
             row.className = 'invisi';
             for(let w=0;w<6;w++){
 
-
                 const tile = document.createElement('div')
                 tile.className = 'tile';
 
+                const imageReveal = randImage(images);
+
                 const reveal = document.createElement('div')
                 reveal.className = 'reveal';
+                reveal.style.backgroundImage = `url('resources/index/${imageReveal}.png')`
 
                 const topLayer = this.genScratcher(tile);
                 
@@ -49,7 +51,7 @@ class Ticket{
                 
                 tile.appendChild(reveal);
 
-                tile.classList.add(randImage(images));
+                tile.classList.add(imageReveal);
                 row.appendChild(tile);
             }
             board.appendChild(row);
@@ -58,10 +60,11 @@ class Ticket{
     }
 
     genScratcher(tile){
+        
         const topLayer = document.createElement('canvas');
 
-        topLayer.width = tile.offsetWidth;
-        topLayer.height = tile.offsetHeight;
+        topLayer.width = 80;
+        topLayer.height = 80;
 
         topLayer.className = 'scratch'
 
@@ -81,17 +84,28 @@ class Ticket{
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, topLayer.width, topLayer.height);
 
-        let isDrawing = false;
+        var isDrawing = false;
 
-        topLayer.addEventListener("mousemove", (e) => {
-            isDrawing = true;
-            scratch(e)
+        topLayer.addEventListener('click', (e) =>{
+
+            topLayer.addEventListener("mousemove", (e) => {
+                isDrawing = true;
+                scratch(e)
+
+            })
+            setTimeout(() => {
+            console.log('after2sec');
+            }, 2000);
+
         });
         topLayer.addEventListener("touchstart", (e) => {
             isDrawing = true;
+            scratch(e.touches[0]);
         });
         topLayer.addEventListener("touchmove", (e) => {
-
+            if (isDrawing) {
+            scratch(e.touches[0]);
+            }
         });
 
         function scratch(e) {
@@ -112,6 +126,13 @@ class Ticket{
         ticket.id = 'scratcher';
         const desc = document.createElement('div');
         desc.id = 'desc';
+        desc.innerHTML = 
+        `<h2>Git a Scratcher!!<h2>
+        <br>
+        <p>Click and Scratch!<p>
+        <p>Reveal<p>
+        <img src='resources/index/buy.png' alt='Win Coin'>
+        <p>To win the prize shown!<p>`
         
         ticket.appendChild(this.board);
         ticket.appendChild(desc);

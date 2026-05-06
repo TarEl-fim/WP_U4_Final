@@ -1,8 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
 *{
     margin:0;
     padding:0;
     box-sizing: border-box;
+    font-family: "Pixelify Sans";
+    color: blue;
 }
+
+
 
 body{
     display: flex;
@@ -13,13 +19,24 @@ body{
     margin: 0;
     padding: 0;
     background-color: aliceblue;
+    text-align: center;
+}
+
+p{
+    font-size: large;
 }
 
 div{
     display: flex;
-    background-color: rgb(58, 158, 198);
+    background-color: #0a14a4;
     height: 100px;
     width: 100px;
+    background-size: contain;
+}
+
+img{
+    height: 100px;
+    width: auto;
 }
 
 .invisi{
@@ -36,7 +53,7 @@ div{
 .tile{
     height: 100px;
     width: 100px;
-    background-color: black;
+    background-color: transparent;
     border-radius: 20%;
 }
 
@@ -44,10 +61,12 @@ canvas{
     position:absolute;
     height: 100px;
     width: 100px;
+    z-index: 1;
 }
 
+
 .reveal{
-    background-color: aliceblue;
+    background-color: rgb(39, 36, 143);
 }
 
 #desc{
@@ -55,6 +74,7 @@ canvas{
     margin: auto;
     height: 70%;
     width: 25%;
+    flex-direction: column;
 }
 
 #board{
