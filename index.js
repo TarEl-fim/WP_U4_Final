@@ -39,19 +39,13 @@ class Ticket{
                 const tile = document.createElement('div')
                 tile.className = 'tile';
 
-                const imageReveal = randImage(images);
-
-                const reveal = document.createElement('div')
-                reveal.className = 'reveal';
-                reveal.style.backgroundImage = `url('resources/index/${imageReveal}.png')`
-
-                const topLayer = this.genScratcher(tile);
+                const [topLayer, reveal] = this.genScratcher(tile);
                 
                 tile.appendChild(topLayer);
+
                 
                 tile.appendChild(reveal);
 
-                tile.classList.add(imageReveal);
                 row.appendChild(tile);
             }
             board.appendChild(row);
@@ -62,6 +56,16 @@ class Ticket{
     genScratcher(tile){
         
         const topLayer = document.createElement('canvas');
+
+        let imageReveal = randImage(images);
+
+        
+
+        const reveal = document.createElement('div')
+        reveal.className = 'reveal';
+        const randNum = (Math.random()*100).toFixed();
+        reveal.textContent = '$'+randNum;
+        reveal.style.backgroundImage = `url('resources/index/${imageReveal}.png')`
 
         topLayer.width = 80;
         topLayer.height = 80;
@@ -86,15 +90,25 @@ class Ticket{
 
         var isDrawing = false;
 
-        topLayer.addEventListener('click', (e) =>{
+        tile.addEventListener('click', (e) =>{
+
 
             topLayer.addEventListener("mousemove", (e) => {
                 isDrawing = true;
                 scratch(e)
 
             })
+
             setTimeout(() => {
             console.log('after2sec');
+            console.log(imageReveal);
+            if (imageReveal == 'buy'){
+                console.log(tile.classList);
+                if(!tile.classList.contains('used')){
+                    this.addValue(randNum);
+                    tile.classList.add('used');
+                }
+            }
             }, 2000);
 
         });
@@ -118,7 +132,7 @@ class Ticket{
             ctx.fill();
         }
 
-        return topLayer
+        return [topLayer,reveal]
     }
 
     createTicket(){
@@ -132,7 +146,8 @@ class Ticket{
         <p>Click and Scratch!<p>
         <p>Reveal<p>
         <img src='resources/index/buy.png' alt='Win Coin'>
-        <p>To win the prize shown!<p>`
+        <p>To win the prize shown!<p>
+        <p>Current Ticket Value: $<p  id='value'>0</p></p>`
         
         ticket.appendChild(this.board);
         ticket.appendChild(desc);
@@ -141,13 +156,28 @@ class Ticket{
 
         return ticket
     }
+
+    addValue(numb){
+        const tickValue = document.getElementById('value');
+        let numVal = Number(tickValue.textContent);
+        console.log(numVal)
+        let newVal = numVal+Number(numb);
+        console.log(newVal)
+        tickValue.textContent = `${newVal}`;
+    }
 }
 
 function newTicket(){
     const body = document.getElementsByTagName('body')[0];
+
+    if (PlayedBefore){
+        const oldTick = document.getElementById('scratcher');
+        body.removeChild(oldTick);
+    }
 
     var lotto = new Ticket('blank');
     body.appendChild(lotto.ticket);
 }
 
 newTicket();
+var PlayedBefore = true;
