@@ -2,7 +2,6 @@ var images = ['brownies','chicken_nuggets','energy_drink_powder','little_bites',
 
 function randImage(imgList){
     let numb = Math.random().toFixed(2);
-    console.log(numb)
     if(numb <= .16){
         imageClass = imgList[0];
     }else if(numb <= .32){
@@ -82,7 +81,6 @@ class Ticket{
             topLayer.height
         );
         
-        //https://webdesign.tutsplus.com/how-to-create-a-scratch-card-effect-in-vanilla-javascript--cms-108922t
 
         gradient.addColorStop(0, "#1e246f");
         gradient.addColorStop(1, "#5861e3");
@@ -101,10 +99,7 @@ class Ticket{
             })
 
             setTimeout(() => {
-            console.log('after2sec');
-            console.log(imageReveal);
             if (imageReveal == 'buy'){
-                console.log(tile.classList);
                 if(!tile.classList.contains('used')){
                     this.addValue(randNum);
                     tile.classList.add('used');
@@ -153,7 +148,7 @@ class Ticket{
         ticket.appendChild(this.board);
         ticket.appendChild(desc);
 
-        console.log(ticket)
+        
 
         return ticket
     }
@@ -163,11 +158,11 @@ class Ticket{
         const totalVal = document.getElementById('total');
         let numVal = Number(tickValue.textContent);
         let totVal = Number(totalVal.textContent);
-        console.log(numVal)
+
         let newVal = numVal+Number(numb);
         
         let newtotVal = totVal+Number(numb);
-        console.log(newVal)
+
         tickValue.textContent = `${newVal}`;
     
         totalVal.textContent = `${newtotVal}`;
