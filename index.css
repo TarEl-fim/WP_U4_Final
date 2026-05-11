@@ -16,19 +16,21 @@ body{
     height: 100vh;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     margin: 0;
     padding: 0;
-    background-color: aliceblue;
     text-align: center;
+    background-image: url('resources/index/areaTwo.png');
 }
 
 p{
     font-size: large;
+    height: 2%;
 }
 
 div{
     display: flex;
-    background-color: #0a14a4;
+    background-color: #1e246f;
     height: 100px;
     width: 100px;
     background-size: contain;
@@ -65,7 +67,29 @@ canvas{
 }
 
 .button{
-    background-color: aliceblue;
+    display: flex;
+    background-color:#9ba2ff;
+    height: 70%;
+    width: 20%;
+    text-align: center;
+    flex-direction: column;
+    margin: 1%;
+    border-radius: 10px;
+}
+
+.button:hover{
+    background-color: #5861e3;
+}
+.earnings{
+    flex-direction: row;
+    width: fit-content;
+    text-align: center;
+    align-items: center;
+    font-size: xx-large;
+}
+
+h5{
+    color: #9ba2ff;
 }
 
 
@@ -74,7 +98,7 @@ canvas{
 }
 
 #desc{
-    background-color: rgb(157, 196, 229);
+    background-color: #9ba2ff;
     margin: auto;
     height: fit-content;
     width: 25%;
@@ -97,6 +121,7 @@ canvas{
     margin: 0 auto;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
 
 #scratcher{

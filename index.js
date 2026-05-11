@@ -5,19 +5,20 @@ function randImage(imgList){
     console.log(numb)
     if(numb <= .16){
         imageClass = imgList[0];
-    }else if(.17 <= numb <= .32){
+    }else if(numb <= .32){
         imageClass = imgList[1];
-    }else if(.33 <= numb <= .48){
+    }else if(numb <= .48){
         imageClass = imgList[2];
-    }else if(.49 <= numb <= .64){
+    }else if(numb <= .64){
         imageClass = imgList[3];
-    }else if(.65 <= numb <= .80){
+    }else if(numb <= .80){
         imageClass = imgList[4];
-    }else if(.81 <= numb <= .95){
+    }else if(numb <= .95){
         imageClass = imgList[5];
     }else if(.96 <= numb){
         imageClass = imgList[6];
     }
+
 
     return imageClass
 }
@@ -83,8 +84,8 @@ class Ticket{
         
         //https://webdesign.tutsplus.com/how-to-create-a-scratch-card-effect-in-vanilla-javascript--cms-108922t
 
-        gradient.addColorStop(0, "#240e9e");
-        gradient.addColorStop(1, "#3281e7");
+        gradient.addColorStop(0, "#1e246f");
+        gradient.addColorStop(1, "#5861e3");
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, topLayer.width, topLayer.height);
 
@@ -147,7 +148,7 @@ class Ticket{
         <p>Reveal<p>
         <img src='resources/index/buy.png' alt='Win Coin'>
         <p>To win the prize shown!<p>
-        <p>Current Ticket Value: $<p  id='value'>0</p></p>`
+        <p>Current Ticket Value: <p  id='value'>0</p></p>`
         
         ticket.appendChild(this.board);
         ticket.appendChild(desc);
@@ -159,24 +160,53 @@ class Ticket{
 
     addValue(numb){
         const tickValue = document.getElementById('value');
+        const totalVal = document.getElementById('total');
         let numVal = Number(tickValue.textContent);
+        let totVal = Number(totalVal.textContent);
         console.log(numVal)
         let newVal = numVal+Number(numb);
+        
+        let newtotVal = totVal+Number(numb);
         console.log(newVal)
         tickValue.textContent = `${newVal}`;
+    
+        totalVal.textContent = `${newtotVal}`;
     }
 }
 
 function newTicket(){
     const body = document.getElementsByTagName('body')[0];
+    var poor = false;
 
     if (PlayedBefore){
         const oldTick = document.getElementById('scratcher');
         body.removeChild(oldTick);
+        var totalVal = document.getElementById('total');
+        var totVal = Number(totalVal.textContent);
+        if (totVal<10){
+            poor = true
+        }
     }
 
-    var lotto = new Ticket('blank');
-    body.appendChild(lotto.ticket);
+    if (poor){
+        const loserDiv = document.createElement('h5');
+        loserDiv.textContent = "HAHA YOU'RE POOR!!!";
+        body.appendChild(loserDiv);
+
+    }else{
+
+        var lotto = new Ticket('blank');
+        var totalVal = document.getElementById('total');
+        var totVal = Number(totalVal.textContent);
+        body.appendChild(lotto.ticket);
+
+        let newValue = totVal-10;
+
+        const newHead = document.createElement('h5');
+        newHead.id = 'total';
+        newHead.textContent = newValue;
+        totalVal.replaceWith(newHead);
+    }
 }
 
 newTicket();
